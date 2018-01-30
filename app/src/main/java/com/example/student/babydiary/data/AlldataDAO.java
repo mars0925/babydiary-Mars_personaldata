@@ -218,7 +218,7 @@ public class AlldataDAO {
 
     //修改寶寶資料
 
-    public boolean altersleep(Personal_DataOutput s)
+    public boolean alterpersonal(Personal_DataOutput s)
     {
         ContentValues cv = new ContentValues();
         cv.put("name",s.name);

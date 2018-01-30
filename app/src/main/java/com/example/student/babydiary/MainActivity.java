@@ -24,6 +24,7 @@ import com.example.student.babydiary.data.Grow_DataOutput;
 import com.example.student.babydiary.data.MyDBHelper;
 import com.example.student.babydiary.data.Personal_Data;
 import com.example.student.babydiary.data.Personal_DataDAO;
+import com.example.student.babydiary.data.Personal_DataOutput;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity{
     EditText ed,ed2;
     Spinner sp;
     Calendar c;
-    AlldataDAO dao;
+    public static AlldataDAO dao;
     RadioGroup radioGroup_sex;
     int gender;
     ArrayList<String> personaldata;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         personaldata = new ArrayList<>();
-        AlldataDAO dao = new AlldataDAO(MainActivity.this);
+        dao = new AlldataDAO(MainActivity.this);
         //宣告radioGrop
         radioGroup_sex = (RadioGroup)findViewById(R.id.radioGroup_sex);
 
@@ -96,40 +97,22 @@ public class MainActivity extends AppCompatActivity{
                    {
                        case R.id.radioButton_boy:
                            gender = 1;
-                           //Toast.makeText(MainActivity.this,"boy" + gender,Toast.LENGTH_SHORT).show();
                             break;
                        case R.id.radioButton_girl:
                            gender = 0;
-                           //Toast.makeText(MainActivity.this,"girl" + gender,Toast.LENGTH_SHORT).show();
                            break;
                    }
                }
            });
-
-           insert();
+        reload();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reload();
 
-   public ArrayList<String> insert()
-   {
-       personaldata.add(ed.getText().toString());
-       personaldata.add(String.valueOf(gender));
-       personaldata.add(ed2.getText().toString());
-       return personaldata;
-   }
-
-        /*
-        if (dao.getpersonaldata(0).name != "")
-        {
-            ed.setText(dao.getpersonaldata(0).name);
-        }
-        else
-        {
-            ed.setText("姓名");
-        }
-        */
-
-
+    }
 
     //按確定會把寶寶資料存到DB
     public void click1(View v)
@@ -149,6 +132,32 @@ public class MainActivity extends AppCompatActivity{
         //Personal_DataDAO dao = new Personal_DataDAO(MainActivity.this);
         //Personal_Data personal_data = new Personal_Data(111,"CHANG",1,"2016/05/9");
         //dao.addbaby(personal_data);
+    }
+
+    //修改
+    public void  clickalter(View v)
+    {
+        Intent it  = new Intent(MainActivity.this,edpersonalActivity.class);
+        it.putExtra("id",1);
+        startActivity(it);
+    }
+
+    public void reload()
+    {
+        try {
+            //資料庫有資料時代入資料
+            ed.setText(dao.getpersonaldata(1).name);
+            ed2.setText(dao.getpersonaldata(1).birthday);
+            if (dao.getpersonaldata(1).gender == 1) {
+                radioGroup_sex.check(R.id.radioButton_boy);
+            } else if (dao.getpersonaldata(1).gender == 0) {
+                radioGroup_sex.check(R.id.radioButton_girl);
+            }
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 
 }
