@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">baby diary</string>
+    <string name="feed_mothermilk">母奶</string>
+    <string name="feed_Formulamilk">配方奶</string>
+    <string name="feed_Weaning">副食品</string>
+    <string name="grow_head">頭圍</string>
+    <string name="grow_tall">身高</string>
+    <string name="grow_weight">體重</string>
+    <string name="title_activity_sleep">sleepActivity</string>
+</resources>
