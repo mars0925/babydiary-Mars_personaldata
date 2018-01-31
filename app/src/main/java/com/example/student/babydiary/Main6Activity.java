@@ -3,14 +3,15 @@ package com.example.student.babydiary;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 public class Main6Activity extends AppCompatActivity {
     Spinner sp;
-    TextView contentTV;
 
+    WebView wb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +27,11 @@ public class Main6Activity extends AppCompatActivity {
                 city);
 
         sp.setAdapter(cityList);
-        //sp2.setAdapter(cityList);
-        //sp3.setAdapter(cityList);
         sp.setSelection(1);
 
+        wb = (WebView)findViewById(R.id.webView);
+        wb.getSettings().setJavaScriptEnabled(true);
+        wb.loadUrl("file:///android_asset/www/newtai.html");
 
-        //contentTV.scrollTo(0, 0);//滚动条滚动到0位置
     }
 }

@@ -29,7 +29,7 @@
         android:layout_marginTop="16dp"
         android:text="查詢縣市"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintBottom_toTopOf="@+id/webView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_supporttitle" />
 
@@ -42,25 +42,15 @@
         app:layout_constraintStart_toEndOf="@+id/textView_support1"
         app:layout_constraintTop_toTopOf="@+id/textView_support1" />
 
-    <ScrollView
-        android:id="@+id/scrollView3"
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="368dp"
         android:layout_height="379dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_support1">
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/supply"
-            android:textSize="30sp" />
-    </ScrollView>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
