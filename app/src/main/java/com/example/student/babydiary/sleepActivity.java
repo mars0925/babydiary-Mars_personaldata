@@ -251,6 +251,7 @@ public class sleepActivity extends AppCompatActivity {
 
         AlldataDAO dao = new AlldataDAO(sleepActivity.this);
         dao.addsleep(sleep_data);
+        finish();
 
     }
 

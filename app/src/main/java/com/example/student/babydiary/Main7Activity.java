@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -60,8 +62,56 @@ public class Main7Activity extends AppCompatActivity {
             }
         });
 
+        //第一次安裝時,如果寶寶資料庫沒有東西就轉跳先填資料
+        try {
+           if (dao.getpersonaldata(1).name == "")
+           {           }
+        }
+        catch (Exception e)
+        {
+                Intent it  = new Intent(Main7Activity.this,MainActivity.class);
+                startActivity(it);
+        }
+
+
+
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main7menu,menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_feed:
+                Intent it1 = new Intent(this,FeedActivity.class);
+                startActivity(it1);
+                break;
+            case R.id.menu_grow:
+                Intent it2 = new Intent(this,growActivity.class);
+                startActivity(it2);
+                break;
+            case R.id.menu_sleep:
+                Intent it3 = new Intent(this,sleepActivity.class);
+                startActivity(it3);
+                break;
+            case R.id.menu_supply:
+                Intent it4 = new Intent(this,Main6Activity.class);
+                startActivity(it4);
+                break;
+            case R.id.menu_persaonal:
+                Intent it5 = new Intent(this,MainActivity.class);
+                startActivity(it5);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onResume() {

@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -107,6 +109,28 @@ public class MainActivity extends AppCompatActivity{
         reload();
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_personal,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menu_save:
+                save();
+                break;
+            case R.id.menu_alter:
+                alter();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -115,27 +139,21 @@ public class MainActivity extends AppCompatActivity{
     }
 
     //按確定會把寶寶資料存到DB
-    public void click1(View v)
+    public void save()
     {
-        Intent it = new Intent(this,Main2Activity.class);//跳第2頁
-        startActivity(it);
+        //Intent it = new Intent(this,Main2Activity.class);//跳第2頁
+        //startActivity(it);
 
         Personal_DataDAO dao = new Personal_DataDAO(MainActivity.this);
-
         //姓名,性別代號,生日
-
         Personal_Data personal_data = new Personal_Data(ed.getText().toString(),gender,ed2.getText().toString());
         //加入資料庫
         dao.addbaby(personal_data);
-        //ed2 Birthday
-        //ed 姓名
-        //Personal_DataDAO dao = new Personal_DataDAO(MainActivity.this);
-        //Personal_Data personal_data = new Personal_Data(111,"CHANG",1,"2016/05/9");
-        //dao.addbaby(personal_data);
+        finish();
     }
 
     //修改
-    public void  clickalter(View v)
+    public void alter()
     {
         Intent it  = new Intent(MainActivity.this,edpersonalActivity.class);
         it.putExtra("id",1);

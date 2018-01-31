@@ -115,5 +115,6 @@ public class FeedActivity extends AppCompatActivity {
 
         AlldataDAO dao = new AlldataDAO(FeedActivity.this);
         dao.addfeed(feed_data);
+        finish();
     }
 }

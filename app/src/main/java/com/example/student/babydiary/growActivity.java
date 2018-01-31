@@ -94,11 +94,12 @@ public class growActivity extends AppCompatActivity {
         time = new StringBuilder().append(format(mHour)).append(":")
                 .append(format(mMinute)).toString();
 
-        Grow_Data grow_data = new Grow_Data(date,time ,Integer.valueOf(inputtall.getText().toString()),
-                Integer.valueOf(inputweight.getText().toString()),Integer.valueOf(inputhead.getText().toString()));
+        Grow_Data grow_data = new Grow_Data(date,time ,Double.valueOf(inputtall.getText().toString()),
+                Double.valueOf(inputweight.getText().toString()),Double.valueOf(inputhead.getText().toString()));
 
         Grow_DataDAO dao = new Grow_DataDAO(growActivity.this);
         dao.addgrow(grow_data);
+        finish();
     }
 
 }

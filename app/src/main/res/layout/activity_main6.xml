@@ -24,66 +24,43 @@
         android:id="@+id/textView_support1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="生育"
+        android:layout_marginTop="16dp"
+        android:text="查詢縣市"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_supporttitle" />
-
-    <TextView
-        android:id="@+id/textView_support2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="健檢"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_support1" />
-
-    <TextView
-        android:id="@+id/textView_support3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="32dp"
-        android:text="幼兒相關"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_support2" />
 
     <Spinner
         android:id="@+id/spinner_support1"
         android:layout_width="200dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/textView_support1"
-        app:layout_constraintTop_toBottomOf="@+id/textView_supporttitle" />
+        app:layout_constraintTop_toTopOf="@+id/textView_support1" />
 
-    <Spinner
-        android:id="@+id/spinner_support2"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="368dp"
+        android:layout_height="379dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView_support2"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_support1" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_support1">
 
-    <Spinner
-        android:id="@+id/spinner_support3"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.357"
-        app:layout_constraintStart_toEndOf="@+id/textView_support3"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_support2" />
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/supply"
+            android:textSize="30sp" />
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

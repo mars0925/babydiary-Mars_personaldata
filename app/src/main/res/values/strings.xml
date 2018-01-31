@@ -6,5 +6,25 @@
     <string name="grow_head">頭圍</string>
     <string name="grow_tall">身高</string>
     <string name="grow_weight">體重</string>
+    <string name="menu_feed">吃飯紀錄</string>
+    <string name="menu_grow">成長紀錄</string>
+    <string name="menu_sleep">睡眠紀錄</string>
+    <string name="menu_supply">補助查詢</string>
+    <string name="menu_personal">寶寶資料</string>
+    <string name="menu_save">儲存</string>
+    <string name="menu_alter">修改</string>
+    <string name="supply">
+        鼓勵本市市民生育意願，提升生育率，減緩少子化現象，並減輕家庭養育子女經濟負擔。
+• 申請條件：
+★新生兒之母或父其中一方，設籍並實際居住本市10個月以上（10個月計算方式：新生兒出生日期往前回推10個月），且申請時仍設籍本市者。
+★申請人應於新生兒出生之次日起60日內在本市戶政事務所辦妥出生登記後，於出生之次日起1年內申辦，逾期視為放棄。
+• 申請應備證件：
+1.申請人之國民身分證及印章(或簽名)、新生兒母親之存摺影本。
+2.申請人無法親自辦理時，得委託他人攜帶申請人及受託人之國民身分證、印章及委託書辦理。
+• 補助內容：
+每一胎新生兒發放生育獎勵金新臺幣2萬元整。
+•補充說明：
+一、新生兒之母或父，應符合下列資格之一且申請時仍設籍本市者：
+    </string>
     <string name="title_activity_sleep">sleepActivity</string>
 </resources>

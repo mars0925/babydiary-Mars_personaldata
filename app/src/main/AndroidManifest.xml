@@ -9,16 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/babydiary">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".Main2Activity" />
+        <activity android:name=".Main6Activity" />
+        <activity android:name=".Main7Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".Main6Activity" />
-        <activity android:name=".Main7Activity" />
         <activity android:name=".FeedActivity" />
         <activity android:name=".sleepActivity" />
         <activity android:name=".growActivity" />
