@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.student.babydiary.data.AlldataDAO;
 import com.example.student.babydiary.data.Feed_DataDAO;
@@ -98,6 +101,28 @@ public class Main7Activity extends AppCompatActivity {
         computeage();//計算年紀
         tv_time.setText(getdateformat());//設定今天的日期
 
+        //監聽tv_time內容有沒有發生改變
+        tv_time.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                //重新改設定新的日期
+                date = tv_time.getText().toString();//用來查詢listview的日期
+                //adapter更新
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         //用日曆來選擇日期
         tv_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
