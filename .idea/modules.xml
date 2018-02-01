@@ -4,9 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\androidproject\babydiary-Mars_personaldata\app\app.iml" filepath="C:\androidproject\babydiary-Mars_personaldata\app\app.iml" />
+      <module fileurl="file://C:\Users\Student\Desktop\androidproject\babydiary-Mars_personaldata\app\app.iml" filepath="C:\Users\Student\Desktop\androidproject\babydiary-Mars_personaldata\app\app.iml" />
       <module fileurl="file://C:\Users\Student\Desktop\babydiary-Mars_personaldata\babydiary.iml" filepath="C:\Users\Student\Desktop\babydiary-Mars_personaldata\babydiary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/babydiary-Mars_personaldata.iml" filepath="$PROJECT_DIR$/.idea/babydiary-Mars_personaldata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/babydiary-Mars_personaldata.iml" filepath="$PROJECT_DIR$/babydiary-Mars_personaldata.iml" />
       <module fileurl="file://C:\androidproject\babydiary-Mars_personaldata\babydiary-Mars_personaldata.iml" filepath="C:\androidproject\babydiary-Mars_personaldata\babydiary-Mars_personaldata.iml" />
+      <module fileurl="file://C:\Users\Student\Desktop\androidproject\babydiary-Mars_personaldata\.idea\babydiary-Mars_personaldata.iml" filepath="C:\Users\Student\Desktop\androidproject\babydiary-Mars_personaldata\.idea\babydiary-Mars_personaldata.iml" />
     </modules>
   </component>
 </project>

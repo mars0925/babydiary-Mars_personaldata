@@ -11,24 +11,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.student.babydiary.data.AlldataDAO;
 import com.example.student.babydiary.data.Feed_DataDAO;
 import com.example.student.babydiary.data.Grow_DataDAO;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Main7Activity extends AppCompatActivity {
     ListView listView;
     Myadapter adapter;
-
-    TextView settime,setcontext;
+    TextView settime,setcontext,tv_age,tv_time;
     public static AlldataDAO dao;
+    Date birthDay;
+    /*声明日期及时间变量*/
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    /*声明对象变量*/
+    TimePicker tp;
+    DatePicker dp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main7);
+        tv_age = findViewById(R.id.age);
+
         listView = (ListView)findViewById(R.id.listView);
         //設定dao看資料是哪一張表
         dao = new AlldataDAO(Main7Activity.this);
@@ -73,6 +89,28 @@ public class Main7Activity extends AppCompatActivity {
                 startActivity(it);
         }
 
+        computeage();//計算年紀
+
+
+            /*取得目前日期与时间*/
+        Calendar c=Calendar.getInstance();
+        mYear=c.get(Calendar.YEAR);
+        mMonth=c.get(Calendar.MONTH);
+        mDay=c.get(Calendar.DAY_OF_MONTH);
+
+        tv_time = findViewById(R.id.textview_time);
+        updateDisplay();
+        dp = new DatePicker(Main7Activity.this);
+        dp.init(mYear,mMonth,mDay, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker datePicker, int  year, int monthOfYear, int dayOfMonth) {
+                mYear=year;
+                mMonth= monthOfYear;
+                mDay=dayOfMonth;
+                /*调用updateDisplay()来改变显示日期*/
+                updateDisplay();
+            }
+        });
 
 
     }
@@ -117,6 +155,7 @@ public class Main7Activity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
+        computeage();//計算年紀
     }
 
     //設定feed的顯示內容
@@ -157,6 +196,55 @@ public class Main7Activity extends AppCompatActivity {
                 "總共睡了 " + hr + "小時"+ min + "分鐘";
         //"寶寶起床 " + dao.getList().get(i).endsleep +  "" + "\n" +
         return contextstr;
+    }
+
+    //計算年紀
+    public void computeage()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            birthDay = sdf.parse(dao.getpersonaldata(1).birthday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar cal = Calendar.getInstance();
+
+        if (cal.before(birthDay)) {
+            throw new IllegalArgumentException(
+                    "The birthDay is before Now.It's unbelievable!");
+        }
+
+        int yearNow = cal.get(Calendar.YEAR);
+        int monthNow = cal.get(Calendar.MONTH)+1;
+
+
+        cal.setTime(birthDay);
+        int yearBirth = cal.get(Calendar.YEAR);
+        int monthBirth = cal.get(Calendar.MONTH)+1;
+
+        int birthsum = yearBirth*12+monthBirth;
+        int nowsum = yearNow*12+monthNow;
+        int difmonth = nowsum-birthsum;
+        int year = difmonth/12;
+        int month = difmonth%12;
+        tv_age.setText("寶寶已經" + year + "年"+ month+"月了");
+
+
+    }
+
+    private void updateDisplay() {
+        tv_time.setText(
+                new StringBuilder().append(mYear).append("/")
+                        .append(format(mMonth + 1)).append("/")
+                        .append(format(mDay)).append("　"));
+    }
+    /*日期时间显示两位数的方法*/
+    private String format(int x)
+    {
+        String s=""+x;
+        if(s.length()==1) s="0"+s;
+        return s;
     }
 
 

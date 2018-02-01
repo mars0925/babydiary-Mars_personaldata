@@ -1,6 +1,8 @@
 package com.example.student.babydiary;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +36,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity{
     TextView tv,tv2,tv3,tv4;
-    EditText ed,ed2;
+    EditText ed,ed2,ed3;
     Spinner sp;
     Calendar c;
     public static AlldataDAO dao;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity{
         dao = new AlldataDAO(MainActivity.this);
         //宣告radioGrop
         radioGroup_sex = (RadioGroup)findViewById(R.id.radioGroup_sex);
-
+        ed3 = (EditText)findViewById(R.id.edittext_city);
         ed = (EditText)findViewById(R.id.editText_name);
         tv = new TextView(this);
         tv2 = new TextView(this);
@@ -62,18 +64,31 @@ public class MainActivity extends AppCompatActivity{
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     c=Calendar.getInstance();
-                    new DatePickerDialog(MainActivity.this,android.R.style.Theme_Holo_Dialog, new DatePickerDialog.OnDateSetListener() {
+                    new DatePickerDialog(MainActivity.this,android.R.style.Theme_Holo_Light_Dialog, new DatePickerDialog.OnDateSetListener() {
 
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            String strmon,strday;
 
-                            ed2.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                            if(dayOfMonth <10){
+                                strday="0"+dayOfMonth;
+                            }else{
+                                strday =String.valueOf(dayOfMonth);
+                            }
+
+                            if((monthOfYear+1) <10){
+                                strmon="0"+(monthOfYear+1);
+                            }else{
+                                strmon =String.valueOf(monthOfYear+1);
+                            }
+                            ed2.setText(year + "/" + strmon + "/" + strday);
                         }
                     }, c.get(c.YEAR), c.get(c.MONTH), c.get(c.DAY_OF_MONTH)).show();
-
                 }
             }
         });
+
+
         ed2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,14 +97,28 @@ public class MainActivity extends AppCompatActivity{
                 new DatePickerDialog(MainActivity.this,android.R.style.Theme_Holo_Light_Dialog, new DatePickerDialog.OnDateSetListener() {
 
                     @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    public void onDateSet(DatePicker view, int  year, int monthOfYear, int dayOfMonth) {
+                        String strmon,strday;
 
-                        ed2.setText(year + "/" + (monthOfYear + 1) + "/" + dayOfMonth);
+                        if(dayOfMonth <10){
+                            strday="0"+dayOfMonth;
+                        }else{
+                            strday =String.valueOf(dayOfMonth);
+                        }
+
+                        if((monthOfYear+1) <10){
+                            strmon="0"+(monthOfYear+1);
+                        }else{
+                            strmon =String.valueOf(monthOfYear+1);
+                        }
+                        ed2.setText(year + "/" + strmon + "/" + strday);
                     }
+
                 }, c.get(c.YEAR), c.get(c.MONTH), c.get(c.DAY_OF_MONTH)).show();
 
             }
         });
+
 
         //radiobutton確認選項
         radioGroup_sex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -141,15 +170,67 @@ public class MainActivity extends AppCompatActivity{
     //按確定會把寶寶資料存到DB
     public void save()
     {
-        //Intent it = new Intent(this,Main2Activity.class);//跳第2頁
-        //startActivity(it);
+        //String str = String.valueOf(ed.getText());
+        //Log.d("MSFFFFF",str);
 
-        Personal_DataDAO dao = new Personal_DataDAO(MainActivity.this);
-        //姓名,性別代號,生日
-        Personal_Data personal_data = new Personal_Data(ed.getText().toString(),gender,ed2.getText().toString());
-        //加入資料庫
-        dao.addbaby(personal_data);
-        finish();
+
+        if (ed.getText().toString().matches(""))
+        {
+            AlertDialog.Builder ad;
+            ad = new AlertDialog.Builder(MainActivity.this);
+            ad.setTitle("確認資料");//設定視窗標題
+            ad.setMessage("姓名不可以是空白");//設定顯示的文字
+            ad.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            ad.show();
+        }
+
+        else if ( ed2.getText().toString().matches(""))
+        {
+            AlertDialog.Builder ad;
+            ad = new AlertDialog.Builder(MainActivity.this);
+            ad.setTitle("確認資料");//設定視窗標題
+            ad.setMessage("生日不可以是空白");//設定顯示的文字
+            ad.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            ad.show();
+        }
+        else if ( ed3.getText().toString().matches(""))
+        {
+            AlertDialog.Builder ad;
+            ad = new AlertDialog.Builder(MainActivity.this);
+            ad.setTitle("確認資料");//設定視窗標題
+            ad.setMessage("戶籍地不可以是空白");//設定顯示的文字
+            ad.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            ad.show();
+        }
+
+        else {
+
+            Personal_DataDAO dao = new Personal_DataDAO(MainActivity.this);
+            //姓名,性別代號,生日
+
+
+            Personal_Data personal_data = new Personal_Data(ed.getText().toString(),gender,ed2.getText().toString());
+            //加入資料庫
+            dao.addbaby(personal_data);
+            finish();
+        }
+
+
     }
 
     //修改
