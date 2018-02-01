@@ -1,5 +1,6 @@
 package com.example.student.babydiary;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -28,7 +30,8 @@ import java.util.Date;
 public class Main7Activity extends AppCompatActivity {
     ListView listView;
     Myadapter adapter;
-    TextView settime,setcontext,tv_age,tv_time;
+    TextView settime,setcontext,tv_age;
+    EditText tv_time;
     public static AlldataDAO dao;
     Date birthDay;
     /*声明日期及时间变量*/
@@ -36,14 +39,16 @@ public class Main7Activity extends AppCompatActivity {
     private int mMonth;
     private int mDay;
     /*声明对象变量*/
-    TimePicker tp;
-    DatePicker dp;
+    public TimePicker tp;
+    public DatePicker dp;
+    Calendar c,c1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main7);
         tv_age = findViewById(R.id.age);
+        tv_time = findViewById(R.id.editText_time);
 
         listView = (ListView)findViewById(R.id.listView);
         //設定dao看資料是哪一張表
@@ -90,38 +95,77 @@ public class Main7Activity extends AppCompatActivity {
         }
 
         computeage();//計算年紀
-
-
-            /*取得目前日期与时间*/
-        Calendar c=Calendar.getInstance();
-        mYear=c.get(Calendar.YEAR);
-        mMonth=c.get(Calendar.MONTH);
-        mDay=c.get(Calendar.DAY_OF_MONTH);
-
-        tv_time = findViewById(R.id.textview_time);
-        updateDisplay();
-        dp = new DatePicker(Main7Activity.this);
-        dp.init(mYear,mMonth,mDay, new DatePicker.OnDateChangedListener() {
+        tv_time.setText(getdateformat());//設定今天的日期
+        //用日曆來選擇日期
+        tv_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onDateChanged(DatePicker datePicker, int  year, int monthOfYear, int dayOfMonth) {
-                mYear=year;
-                mMonth= monthOfYear;
-                mDay=dayOfMonth;
-                /*调用updateDisplay()来改变显示日期*/
-                updateDisplay();
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    c1 = Calendar.getInstance();
+                    new DatePickerDialog(Main7Activity.this,android.R.style.Theme_Holo_Light_Dialog, new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            String strmon,strday;
+
+                            if(dayOfMonth <10){
+                                strday="0"+dayOfMonth;
+                            }else{
+                                strday =String.valueOf(dayOfMonth);
+                            }
+
+                            if((monthOfYear+1) <10){
+                                strmon="0"+(monthOfYear+1);
+                            }else{
+                                strmon =String.valueOf(monthOfYear+1);
+                            }
+                            tv_time.setText(year + "/" + strmon + "/" + strday);
+                        }
+                    }, c1.get(c1.YEAR), c1.get(c1.MONTH), c1.get(c1.DAY_OF_MONTH)).show();
+                }
+            }
+        });
+        //用日曆來選擇日期
+        tv_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                c1 = Calendar.getInstance();
+                new DatePickerDialog(Main7Activity.this,android.R.style.Theme_Holo_Light_Dialog, new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int  year, int monthOfYear, int dayOfMonth) {
+                        String strmon,strday;
+
+                        if(dayOfMonth <10){
+                            strday="0"+dayOfMonth;
+                        }else{
+                            strday =String.valueOf(dayOfMonth);
+                        }
+
+                        if((monthOfYear+1) <10){
+                            strmon="0"+(monthOfYear+1);
+                        }else{
+                            strmon =String.valueOf(monthOfYear+1);
+                        }
+                        tv_time.setText(year + "/" + strmon + "/" + strday);
+                    }
+
+                }, c1.get(c1.YEAR), c1.get(c1.MONTH), c1.get(c1.DAY_OF_MONTH)).show();
+
             }
         });
 
 
     }
-
+    //解出menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main7menu,menu);
         return super.onCreateOptionsMenu(menu);
 
     }
-
+    //menu點擊的事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
@@ -151,11 +195,13 @@ public class Main7Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //此頁重新載入
     @Override
     protected void onResume() {
         super.onResume();
         adapter.notifyDataSetChanged();
         computeage();//計算年紀
+        tv_time.setText(getdateformat());
     }
 
     //設定feed的顯示內容
@@ -245,6 +291,31 @@ public class Main7Activity extends AppCompatActivity {
         String s=""+x;
         if(s.length()==1) s="0"+s;
         return s;
+    }
+
+    //整理目前日期的格式  2018/02/01
+    public String getdateformat()
+    {
+        c = Calendar.getInstance();
+        String strday,strmon;
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+
+        if(day <10){
+            strday = "0" + day;
+        }else{
+            strday = String.valueOf(day);
+        }
+
+        if((month+1) <10){
+            strmon="0"+(month+1);
+        }else{
+            strmon =String.valueOf(month+1);
+        }
+        return (year + "/" + strmon + "/" + strday);
+
     }
 
 

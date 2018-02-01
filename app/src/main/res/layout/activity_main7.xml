@@ -32,7 +32,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_time" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_time"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/age"
@@ -46,17 +47,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_historytitle" />
 
-    <TextView
-        android:id="@+id/textview_time"
+    <EditText
+        android:id="@+id/editText_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="2018-01-31"
-        android:textSize="30sp"
+        android:ems="10"
+        android:inputType="date"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/age" />
+
 </android.support.constraint.ConstraintLayout>
