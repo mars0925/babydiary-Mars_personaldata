@@ -42,6 +42,7 @@ public class Main7Activity extends AppCompatActivity {
     public TimePicker tp;
     public DatePicker dp;
     Calendar c,c1;
+    String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +97,7 @@ public class Main7Activity extends AppCompatActivity {
 
         computeage();//計算年紀
         tv_time.setText(getdateformat());//設定今天的日期
+
         //用日曆來選擇日期
         tv_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -156,7 +158,7 @@ public class Main7Activity extends AppCompatActivity {
             }
         });
 
-
+        date = tv_time.getText().toString();//用來查詢listview的日期
     }
     //解出menu
     @Override
@@ -202,34 +204,35 @@ public class Main7Activity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         computeage();//計算年紀
         tv_time.setText(getdateformat());
+        date = tv_time.getText().toString();//用來查詢listview的日期
     }
 
     //設定feed的顯示內容
-    public String setfeedcontext(int i)
+    public String setfeedcontext(int i,String date)
     {
         String contextstr;
-        contextstr = "母奶 " + dao.getList().get(i).mothermilk + "CC" + "\n" +
-                "配方奶 " + dao.getList().get(i).formula +  "CC" + "\n" +
-                "副食品 " + dao.getList().get(i).weaning +  "CC";
+        contextstr = "母奶 " + dao.getListbydate(date).get(i).mothermilk + "CC" + "\n" +
+                "配方奶 " + dao.getListbydate(date).get(i).formula +  "CC" + "\n" +
+                "副食品 " + dao.getListbydate(date).get(i).weaning +  "CC";
         return contextstr;
     }
 
 
     //設定grow的顯示內容
-    public String setgrowcontext(int i)
+    public String setgrowcontext(int i,String date)
     {
         String contextstr;
-        contextstr = "身高 " + dao.getList().get(i).tall + "公分" + "\n" +
-                "體重 " + dao.getList().get(i).weight +  "公斤" + "\n" +
-                "頭圍 " + dao.getList().get(i).headlength +  "公分";
+        contextstr = "身高 " + dao.getListbydate(date).get(i).tall + "公分" + "\n" +
+                "體重 " + dao.getListbydate(date).get(i).weight +  "公斤" + "\n" +
+                "頭圍 " + dao.getListbydate(date).get(i).headlength +  "公分";
         return contextstr;
     }
 
     //設定sleep的顯示內容
-    public String setsleepcontext(int i)
+    public String setsleepcontext(int i,String date)
     {
-        String hr =  dao.getList().get(i).sleephour;
-        String min =  dao.getList().get(i).sleepmin;
+        String hr =  dao.getListbydate(date).get(i).sleephour;
+        String min =  dao.getListbydate(date).get(i).sleepmin;
         /*
         String timestr = dao.getList().get(i).sleeptime; //取睡覺的時間
         String[] str = timestr.split(":");//剖析分鐘的部分
@@ -238,7 +241,7 @@ public class Main7Activity extends AppCompatActivity {
         */
 
         String contextstr;
-        contextstr = "寶寶睡覺 " + dao.getList().get(i).startsleep + "" + "\n" +
+        contextstr = "寶寶睡覺 " + dao.getListbydate(date).get(i).startsleep + "" + "\n" +
                 "總共睡了 " + hr + "小時"+ min + "分鐘";
         //"寶寶起床 " + dao.getList().get(i).endsleep +  "" + "\n" +
         return contextstr;
@@ -325,7 +328,7 @@ public class Main7Activity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return dao.getList().size() ;
+            return dao.getListbydate(date).size() ;
         }
 
         @Override
@@ -348,19 +351,19 @@ public class Main7Activity extends AppCompatActivity {
             settime = v.findViewById(R.id.settime);
             setcontext = v.findViewById(R.id.setcontext);
 
-            settime.setText(String.valueOf(dao.getList().get(i).time));
-            if (dao.getList().get(i).addtype == 1)
+            settime.setText(String.valueOf(dao.getListbydate(date).get(i).time));
+            if (dao.getListbydate(date).get(i).addtype == 1)
             {
-                setcontext.setText(setfeedcontext(i));
+                setcontext.setText(setfeedcontext(i,date));
             }
-            else if (dao.getList().get(i).addtype == 2)
+            else if (dao.getListbydate(date).get(i).addtype == 2)
             {
-                setcontext.setText(setgrowcontext(i));
+                setcontext.setText(setgrowcontext(i,date));
             }
 
-            else if (dao.getList().get(i).addtype == 3)
+            else if (dao.getListbydate(date).get(i).addtype == 3)
             {
-                setcontext.setText(setsleepcontext(i));
+                setcontext.setText(setsleepcontext(i,date));
             }
 
 

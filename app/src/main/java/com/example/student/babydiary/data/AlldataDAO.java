@@ -55,10 +55,11 @@ public class AlldataDAO {
         }
         return mylist;
     }
+
     //依照日期
     public ArrayList<Outputdata> getListbydate(String date) {
         ArrayList<Outputdata> mylist = new ArrayList<>();
-        Cursor c = db.query("badydata", new String[] {"_id", "date","time", "mothermilk","formula","weaning","tall","weight","headlength","startsleep","endsleep","sleepday","sleephour","sleepmin","addtype"}, "date",new String[] {date}, null, null, null);
+        Cursor c = db.query("badydata", new String[] {"_id", "date","time", "mothermilk","formula","weaning","tall","weight","headlength","startsleep","endsleep","sleepday","sleephour","sleepmin","addtype"}, "date=?",new String[] {String.valueOf(date)}, null, null, null);
         if (c.moveToFirst())
         {
             Outputdata s1 = new Outputdata(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getDouble(6),c.getDouble(7),c.getDouble(8),c.getString(9),c.getString(10),c.getString(11),c.getString(12),c.getString(13),c.getInt(14));
