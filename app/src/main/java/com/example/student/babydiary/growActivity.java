@@ -102,4 +102,12 @@ public class growActivity extends AppCompatActivity {
         finish();
     }
 
+    //清除填寫內容
+    public void click_reset(View v)
+    {
+        inputtall.setText("0");
+        inputweight.setText("0");
+        inputhead.setText("0");
+    }
+
 }

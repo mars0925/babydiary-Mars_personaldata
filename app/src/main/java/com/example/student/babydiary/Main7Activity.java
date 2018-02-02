@@ -284,10 +284,12 @@ public class Main7Activity extends AppCompatActivity {
 
         Calendar cal = Calendar.getInstance();
 
+        /*
         if (cal.before(birthDay)) {
             throw new IllegalArgumentException(
                     "The birthDay is before Now.It's unbelievable!");
         }
+        */
 
 
         try
@@ -305,7 +307,21 @@ public class Main7Activity extends AppCompatActivity {
             int difmonth = nowsum-birthsum;
             int year = difmonth/12;
             int month = difmonth%12;
-            tv_age.setText("寶寶已經" + year + "年"+ month+"月了");
+            if (difmonth < 0)
+            {
+                tv_age.setText("寶寶還沒出生");
+            }
+
+
+            if (year ==0)
+            {
+                tv_age.setText("寶寶已經" + month +"月了");
+            }
+            else
+            {
+                tv_age.setText("寶寶已經" + year + "年"+ month+"月了");
+            }
+
         }
         catch (Exception e)
         {
