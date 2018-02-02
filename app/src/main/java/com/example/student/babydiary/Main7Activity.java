@@ -278,7 +278,7 @@ public class Main7Activity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         try {
             birthDay = sdf.parse(dao.getpersonaldata(1).birthday);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -289,20 +289,30 @@ public class Main7Activity extends AppCompatActivity {
                     "The birthDay is before Now.It's unbelievable!");
         }
 
-        int yearNow = cal.get(Calendar.YEAR);
-        int monthNow = cal.get(Calendar.MONTH)+1;
+
+        try
+        {
+            int yearNow = cal.get(Calendar.YEAR);
+            int monthNow = cal.get(Calendar.MONTH)+1;
 
 
-        cal.setTime(birthDay);
-        int yearBirth = cal.get(Calendar.YEAR);
-        int monthBirth = cal.get(Calendar.MONTH)+1;
+            cal.setTime(birthDay);
+            int yearBirth = cal.get(Calendar.YEAR);
+            int monthBirth = cal.get(Calendar.MONTH)+1;
 
-        int birthsum = yearBirth*12+monthBirth;
-        int nowsum = yearNow*12+monthNow;
-        int difmonth = nowsum-birthsum;
-        int year = difmonth/12;
-        int month = difmonth%12;
-        tv_age.setText("寶寶已經" + year + "年"+ month+"月了");
+            int birthsum = yearBirth*12+monthBirth;
+            int nowsum = yearNow*12+monthNow;
+            int difmonth = nowsum-birthsum;
+            int year = difmonth/12;
+            int month = difmonth%12;
+            tv_age.setText("寶寶已經" + year + "年"+ month+"月了");
+        }
+        catch (Exception e)
+        {
+
+        }
+
+
 
 
     }

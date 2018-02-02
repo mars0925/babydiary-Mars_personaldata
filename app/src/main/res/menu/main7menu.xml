@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_feed"
         android:title="@string/menu_feed"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/menu_grow"
         android:title="@string/menu_grow"
@@ -13,7 +13,7 @@
     <item
         android:id="@+id/menu_sleep"
         android:title="@string/menu_sleep"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/menu_supply"
         android:title="@string/menu_supply"

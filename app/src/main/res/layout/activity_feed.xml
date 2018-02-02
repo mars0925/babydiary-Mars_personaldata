@@ -9,8 +9,8 @@
     <EditText
         android:id="@+id/inputMK"
         android:layout_width="160dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8sp"
         android:ems="10"
         android:inputType="number"
         android:text="0"
@@ -47,8 +47,8 @@
         android:id="@+id/savefilebt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4sp"
+        android:layout_marginTop="24dp"
         android:onClick="clickadd"
         android:text="儲存"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,9 +70,9 @@
     <TextView
         android:id="@+id/feed_formula"
         android:layout_width="130dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16sp"
+        android:layout_marginTop="24dp"
         android:text="@string/feed_Formulamilk"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -83,32 +83,32 @@
     <EditText
         android:id="@+id/inputformula"
         android:layout_width="160dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="12dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12sp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/feed_formula"
-        app:layout_constraintTop_toBottomOf="@+id/inputMK" />
+        app:layout_constraintTop_toTopOf="@+id/feed_formula" />
 
     <TextView
         android:id="@+id/textView_historytitle"
         android:layout_width="54dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="cc"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/inputformula"
-        app:layout_constraintTop_toBottomOf="@+id/textView_supporttitle" />
+        app:layout_constraintTop_toTopOf="@+id/inputformula" />
 
     <TextView
         android:id="@+id/feed_Weaning"
         android:layout_width="130dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16sp"
+        android:layout_marginTop="24dp"
         android:text="@string/feed_Weaning"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
@@ -118,32 +118,32 @@
     <EditText
         android:id="@+id/inputWeaning"
         android:layout_width="160dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8sp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
         android:text="0"
         app:layout_constraintStart_toEndOf="@+id/feed_Weaning"
-        app:layout_constraintTop_toBottomOf="@+id/inputformula" />
+        app:layout_constraintTop_toTopOf="@+id/feed_Weaning" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="54dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="cc"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/inputWeaning"
-        app:layout_constraintTop_toBottomOf="@+id/textView_historytitle" />
+        app:layout_constraintTop_toTopOf="@+id/inputWeaning" />
 
     <TextView
         android:id="@+id/feed_mothermilk"
         android:layout_width="130dp"
-        android:layout_height="43dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:text="@string/feed_mothermilk"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
@@ -154,8 +154,9 @@
         android:id="@+id/alarm_clockbt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16sp"
+        android:layout_marginTop="24dp"
+        android:onClick="clickalarm"
         android:text="設定鬧鐘"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/feed_Weaning" />

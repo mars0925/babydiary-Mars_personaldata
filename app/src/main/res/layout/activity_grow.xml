@@ -38,9 +38,9 @@
     <TextView
         android:id="@+id/grow_tall"
         android:layout_width="130dp"
-        android:layout_height="43dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/grow_tall"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
@@ -50,7 +50,7 @@
     <EditText
         android:id="@+id/inputtall"
         android:layout_width="160dp"
-        android:layout_height="42dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="number"
@@ -71,9 +71,9 @@
     <TextView
         android:id="@+id/grow_weight"
         android:layout_width="130dp"
-        android:layout_height="43dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/grow_weight"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
@@ -83,7 +83,7 @@
     <EditText
         android:id="@+id/inputweight"
         android:layout_width="160dp"
-        android:layout_height="42dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="number"
@@ -104,9 +104,9 @@
     <TextView
         android:id="@+id/grow_headlenth"
         android:layout_width="130dp"
-        android:layout_height="43dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/grow_head"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
@@ -116,7 +116,7 @@
     <EditText
         android:id="@+id/inputhead"
         android:layout_width="160dp"
-        android:layout_height="43dp"
+        android:layout_height="0dp"
         android:ems="10"
         android:inputType="number"
         android:text="0"

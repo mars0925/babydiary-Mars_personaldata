@@ -7,7 +7,7 @@
     tools:context="com.example.student.babydiary.MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/badyphto"
         android:layout_width="0dp"
         android:layout_height="225dp"
         android:layout_marginEnd="8dp"
@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/main_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -29,11 +29,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/badyphto" />
 
     <TextView
         android:id="@+id/main_sex"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -45,10 +45,10 @@
 
     <TextView
         android:id="@+id/main_bday"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="出生日期"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="30sp"
@@ -57,42 +57,35 @@
 
     <EditText
         android:id="@+id/editText_name"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/main_name"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/badyphto" />
 
     <EditText
         android:id="@+id/editText_Birthday"
-        android:layout_width="0dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="date"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/main_bday"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup_sex" />
+        app:layout_constraintTop_toTopOf="@+id/main_bday" />
 
 
     <RadioGroup
         android:id="@+id/radioGroup_sex"
-        android:layout_width="273dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@+id/main_sex"
-        app:layout_constraintTop_toBottomOf="@+id/editText_name">
+        app:layout_constraintTop_toTopOf="@+id/main_sex">
 
         <RadioButton
             android:id="@+id/radioButton_boy"
@@ -112,9 +105,9 @@
 
     <TextView
         android:id="@+id/textView17"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:text="您的戶籍地"
         android:textSize="30sp"
@@ -129,7 +122,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="新北市"
-        android:textSize="30sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/textView17"
         app:layout_constraintTop_toTopOf="@+id/textView17" />
 

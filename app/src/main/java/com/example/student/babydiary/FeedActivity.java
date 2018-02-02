@@ -1,9 +1,12 @@
 package com.example.student.babydiary;
 
+import android.content.Intent;
+import android.provider.AlarmClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,6 +33,7 @@ public class FeedActivity extends AppCompatActivity {
     EditText inputMK;
     EditText inputformula;
     EditText inputWeaning;
+    Button bt;
     //int feednum = 0;
 
     @Override
@@ -39,6 +43,7 @@ public class FeedActivity extends AppCompatActivity {
         inputMK = (EditText)findViewById(R.id.inputMK);
         inputformula = (EditText)findViewById(R.id.inputformula);
         inputWeaning = (EditText)findViewById(R.id.inputWeaning);
+        bt = (Button)findViewById(R.id.alarm_clockbt);
 
         /*取得目前日期与时间*/
         Calendar c=Calendar.getInstance();
@@ -116,5 +121,16 @@ public class FeedActivity extends AppCompatActivity {
         AlldataDAO dao = new AlldataDAO(FeedActivity.this);
         dao.addfeed(feed_data);
         finish();
+    }
+    public void clickalarm(View v)
+    {
+        Intent i = new Intent(AlarmClock.ACTION_SET_ALARM);
+        /*
+        i.putExtra(AlarmClock.EXTRA_MESSAGE, "New Alarm");
+        i.putExtra(AlarmClock.EXTRA_HOUR, 10);
+        i.putExtra(AlarmClock.EXTRA_MINUTES, 30);
+        */
+        startActivity(i);
+
     }
 }

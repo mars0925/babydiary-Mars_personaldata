@@ -4,7 +4,11 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -14,24 +18,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.student.babydiary.data.AlldataDAO;
-import com.example.student.babydiary.data.Feed_Data;
-import com.example.student.babydiary.data.Feed_DataDAO;
-import com.example.student.babydiary.data.Feed_DataOutout;
-import com.example.student.babydiary.data.Grow_Data;
-import com.example.student.babydiary.data.Grow_DataDAO;
-import com.example.student.babydiary.data.Grow_DataOutput;
-import com.example.student.babydiary.data.MyDBHelper;
 import com.example.student.babydiary.data.Personal_Data;
 import com.example.student.babydiary.data.Personal_DataDAO;
-import com.example.student.babydiary.data.Personal_DataOutput;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import static java.security.AccessController.getContext;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -42,7 +47,9 @@ public class MainActivity extends AppCompatActivity{
     public static AlldataDAO dao;
     RadioGroup radioGroup_sex;
     int gender;
+    final public int imagerequest = 456;
     ArrayList<String> personaldata;
+    public ImageView im;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +60,7 @@ public class MainActivity extends AppCompatActivity{
         radioGroup_sex = (RadioGroup)findViewById(R.id.radioGroup_sex);
         ed3 = (EditText)findViewById(R.id.edittext_city);
         ed = (EditText)findViewById(R.id.editText_name);
+        im = (ImageView)findViewById(R.id.badyphto);
         tv = new TextView(this);
         tv2 = new TextView(this);
         tv3 = new TextView(this);
@@ -135,9 +143,49 @@ public class MainActivity extends AppCompatActivity{
                    }
                }
            });
+
+        //點擊imageView後拍照放入
+        im.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                File f = new File(getExternalFilesDir("PHOTO"), "myphoto.jpg");
+
+                //
+                Uri uri = FileProvider.getUriForFile(MainActivity.this, "com.example.student.babydiary.provider", f);
+                it.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+                startActivityForResult(it, imagerequest);
+            }
+        });
         reload();
     }
 
+    //接受immageview點擊後送出的resultCode
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //方法的返回的intent的extras中存储在对应data下，一张缩略图
+        if (requestCode == imagerequest)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                File f = new File(getExternalFilesDir("PHOTO"), "myphoto.jpg");
+                try {
+                    InputStream is = new FileInputStream(f);
+                    Log.d("BMP", "Can READ:" + is.available());
+                    Bitmap bmp = getFitImage(is);
+                    im.setImageBitmap(bmp);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -164,6 +212,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onResume() {
         super.onResume();
         reload();
+        loadphoto();
 
     }
 
@@ -241,6 +290,7 @@ public class MainActivity extends AppCompatActivity{
         startActivity(it);
     }
 
+    //資料庫有資料時代入資料
     public void reload()
     {
         try {
@@ -258,5 +308,59 @@ public class MainActivity extends AppCompatActivity{
 
         }
     }
+
+    //解出照片格式
+    public static Bitmap getFitImage(InputStream is)
+    {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = false;
+        byte[] bytes = new byte[0];
+        try {
+            bytes = readStream(is);
+            //BitmapFactory.decodeStream(inputStream, null, options);
+            Log.d("BMP", "byte length:" + bytes.length);
+            Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+            System.gc();
+            // Log.d("BMP", "Size:" + bmp.getByteCount());
+            return bmp;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //解出照片格式用的readStream方法
+    public static byte[] readStream(InputStream inStream) throws Exception {
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        while ((len = inStream.read(buffer)) != -1) {
+            outStream.write(buffer, 0, len);
+        }
+        outStream.close();
+        inStream.close();
+        return outStream.toByteArray();
+    }
+
+    //讀取資料夾中照片的方法
+    public void loadphoto()
+    {
+        File f = new File(getExternalFilesDir("PHOTO"), "myphoto.jpg");
+        try {
+            InputStream is = new FileInputStream(f);
+            //Log.d("BMP", "Can READ:" + is.available());
+            Bitmap bmp = getFitImage(is);
+            im.setImageBitmap(bmp);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
 
 }
