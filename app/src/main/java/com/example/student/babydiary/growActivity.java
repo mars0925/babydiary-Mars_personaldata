@@ -1,18 +1,33 @@
 package com.example.student.babydiary;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.student.babydiary.data.Grow_Data;
 import com.example.student.babydiary.data.Grow_DataDAO;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 
 public class growActivity extends AppCompatActivity {
+    final public int imagerequest = 456;
     TextView tv6;
     /*声明日期及时间变量*/
     private int mYear;
@@ -20,6 +35,7 @@ public class growActivity extends AppCompatActivity {
     private int mDay;
     private int mHour;
     private int mMinute;
+
     /*声明对象变量*/
     TimePicker tp;
     DatePicker dp;
@@ -65,7 +81,9 @@ public class growActivity extends AppCompatActivity {
                 updateDisplay();
             }
         });
+
     }
+
 
     private void updateDisplay() {
         tv6.setText(
@@ -109,5 +127,7 @@ public class growActivity extends AppCompatActivity {
         inputweight.setText("0");
         inputhead.setText("0");
     }
+
+
 
 }
