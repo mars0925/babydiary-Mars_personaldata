@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.DatePicker;
@@ -33,8 +34,7 @@ import java.util.Date;
 public class Main7Activity extends AppCompatActivity {
     ListView listView;
     Myadapter adapter;
-    TextView settime,setcontext,tv_age;
-    EditText tv_time;
+    TextView settime,setcontext,tv_age,tv_time;
     public static AlldataDAO dao;
     Date birthDay;
     /*声明日期及时间变量*/
@@ -51,9 +51,9 @@ public class Main7Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main7);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         tv_age = findViewById(R.id.age);
-        tv_time = findViewById(R.id.editText_time);
-
+        tv_time = (TextView) findViewById(R.id.textView_time);
         listView = (ListView)findViewById(R.id.listView);
         //設定dao看資料是哪一張表
         dao = new AlldataDAO(Main7Activity.this);
@@ -123,6 +123,7 @@ public class Main7Activity extends AppCompatActivity {
 
             }
         });
+        /*
         //用日曆來選擇日期
         tv_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -152,6 +153,7 @@ public class Main7Activity extends AppCompatActivity {
                 }
             }
         });
+        */
         //用日曆來選擇日期
         tv_time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,6 +232,7 @@ public class Main7Activity extends AppCompatActivity {
         computeage();//計算年紀
         tv_time.setText(getdateformat());
         date = tv_time.getText().toString();//用來查詢listview的日期
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     //設定feed的顯示內容
