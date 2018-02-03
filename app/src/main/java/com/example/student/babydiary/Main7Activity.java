@@ -277,51 +277,55 @@ public class Main7Activity extends AppCompatActivity {
     {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         try {
+            //取得生日的date格式
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             birthDay = sdf.parse(dao.getpersonaldata(1).birthday);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Calendar cal = Calendar.getInstance();
-
-        /*
-        if (cal.before(birthDay)) {
-            throw new IllegalArgumentException(
-                    "The birthDay is before Now.It's unbelievable!");
-        }
-        */
-
 
         try
         {
-            int yearNow = cal.get(Calendar.YEAR);
-            int monthNow = cal.get(Calendar.MONTH)+1;
+            int  day_of_month = 30;
+            //取得當下日期
+            Date d1 = new Date();
+            // getTime()回傳距離1970年1月1日的毫秒差.
+            long diff = d1.getTime()-birthDay.getTime();
+            //兩者差距
+            long diffday = diff/(24*60*60*1000);
+            //年差
+            long  year = diffday/365;
+            //月差距
+            long  month = (long)((diffday-year*365)/day_of_month);
+            //日差距
+            long  day = (long)((diffday-year*365-month*day_of_month)%day_of_month);
 
 
-            cal.setTime(birthDay);
-            int yearBirth = cal.get(Calendar.YEAR);
-            int monthBirth = cal.get(Calendar.MONTH)+1;
 
-            int birthsum = yearBirth*12+monthBirth;
-            int nowsum = yearNow*12+monthNow;
-            int difmonth = nowsum-birthsum;
-            int year = difmonth/12;
-            int month = difmonth%12;
-            if (difmonth < 0)
+            if (diffday < 0)
             {
                 tv_age.setText("寶寶還沒出生");
             }
+            else {
+                if (year == 0 && month == 0)
+                {
+                    tv_age.setText("寶寶未滿1個月");
+                }
+                else
+                {
+                    if (year ==0)
+                    {
+                        tv_age.setText("寶寶已經" + month +"個月了");
+                    }
+                    else
+                    {
+                        tv_age.setText("寶寶已經" + year + "歲"+ month+"個月了");
+                    }
+                }
 
 
-            if (year ==0)
-            {
-                tv_age.setText("寶寶已經" + month +"月了");
             }
-            else
-            {
-                tv_age.setText("寶寶已經" + year + "年"+ month+"月了");
-            }
-
         }
         catch (Exception e)
         {
