@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,6 +37,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 import static java.security.AccessController.getContext;
 
@@ -42,7 +47,6 @@ import static java.security.AccessController.getContext;
 public class MainActivity extends AppCompatActivity{
     TextView tv,tv2,tv3,tv4;
     EditText ed,ed2,ed3;
-    Spinner sp;
     Calendar c;
     public static AlldataDAO dao;
     RadioGroup radioGroup_sex;
@@ -58,7 +62,6 @@ public class MainActivity extends AppCompatActivity{
         dao = new AlldataDAO(MainActivity.this);
         //宣告radioGrop
         radioGroup_sex = (RadioGroup)findViewById(R.id.radioGroup_sex);
-        ed3 = (EditText)findViewById(R.id.edittext_city);
         ed = (EditText)findViewById(R.id.editText_name);
         im = (ImageView)findViewById(R.id.badyphto);
         tv = new TextView(this);
@@ -159,6 +162,7 @@ public class MainActivity extends AppCompatActivity{
                 startActivityForResult(it, imagerequest);
             }
         });
+
         reload();
     }
 
@@ -357,6 +361,9 @@ public class MainActivity extends AppCompatActivity{
             e.printStackTrace();
         }
     }
+
+
+
 
 
 

@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,8 +44,10 @@ public class edpersonalActivity extends AppCompatActivity {
                 {
                     case 0:
                         edgender = 1;
+                        break;
                     case 1:
                         edgender = 0;
+                        break;
                 }
             }
 
@@ -139,7 +142,6 @@ public class edpersonalActivity extends AppCompatActivity {
     public void clickalter(View v)
     {
         Personal_DataOutput s1 = new Personal_DataOutput(id , edname.getText().toString(),edgender,edbirth.getText().toString());
-
         MainActivity.dao.alterpersonal(s1);
         finish();
     }

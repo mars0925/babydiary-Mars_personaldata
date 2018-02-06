@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.student.babydiary.data.AlldataDAO;
 import com.example.student.babydiary.data.Feed_Data;
@@ -225,33 +226,42 @@ public class sleepActivity extends AppCompatActivity {
     {
 
 
-        //按下儲存的時候在取一次時間
-        Calendar c2 =Calendar.getInstance();
-        mYear=c2.get(Calendar.YEAR);
-        mMonth=c2.get(Calendar.MONTH);
-        mDay=c2.get(Calendar.DAY_OF_MONTH);
-        mHour=c2.get(Calendar.HOUR_OF_DAY);
-        mMinute=c2.get(Calendar.MINUTE);
-        String endtime = new StringBuilder().append(format(mHour)).append(":")
-                .append(format(mMinute)).toString();
-        String  startsleeep = time;
-        String  endsleep = endtime;
-
-        String str1 = timer.getText().toString();
-
-        String[] str = str1.split(":");//剖析分鐘的部分
-
-        String sleepday = str[0];
-        String sleephour = str[1];
-        String sleepmin = str[2];
+            //按下儲存的時候在取一次時間
+            Calendar c2 =Calendar.getInstance();
+            mYear=c2.get(Calendar.YEAR);
+            mMonth=c2.get(Calendar.MONTH);
+            mDay=c2.get(Calendar.DAY_OF_MONTH);
+            mHour=c2.get(Calendar.HOUR_OF_DAY);
+            mMinute=c2.get(Calendar.MINUTE);
+            String endtime = new StringBuilder().append(format(mHour)).append(":")
+                    .append(format(mMinute)).toString();
+            String  startsleeep = time;
+            String  endsleep = endtime;
 
 
-        Sleep_Data sleep_data = new Sleep_Data(date,time ,startsleeep,
-                endsleep,sleepday,sleephour,sleepmin);
+            try
+            {
+                String str1 = timer.getText().toString();
+                String[] str = str1.split(":");//剖析分鐘的部分
+                String sleepday = str[0];
+                String sleephour = str[1];
+                String sleepmin = str[2];
+                Sleep_Data sleep_data = new Sleep_Data(date,time ,startsleeep,
+                        endsleep,sleepday,sleephour,sleepmin);
 
-        AlldataDAO dao = new AlldataDAO(sleepActivity.this);
-        dao.addsleep(sleep_data);
-        finish();
+                AlldataDAO dao = new AlldataDAO(sleepActivity.this);
+                dao.addsleep(sleep_data);
+                finish();
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(sleepActivity.this,"還沒開始計時",Toast.LENGTH_SHORT).show();
+            }
+
+
+
+
+
 
     }
 
