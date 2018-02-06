@@ -56,7 +56,7 @@ public class AlldataDAO {
         return mylist;
     }
 
-    //依照日期d
+    //依照日期
     public ArrayList<Outputdata> getListbydate(String date) {
         ArrayList<Outputdata> mylist = new ArrayList<>();
         Cursor c = db.query("badydata", new String[] {"_id", "date","time", "mothermilk","formula","weaning","tall","weight","headlength","startsleep","endsleep","sleepday","sleephour","sleepmin","addtype"}, "date=?",new String[] {String.valueOf(date)}, null, null, null);

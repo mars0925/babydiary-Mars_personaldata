@@ -256,6 +256,7 @@ public class MainActivity extends AppCompatActivity{
             });
             ad.show();
         }
+        /*
         else if ( ed3.getText().toString().matches(""))
         {
             AlertDialog.Builder ad;
@@ -269,7 +270,7 @@ public class MainActivity extends AppCompatActivity{
                 }
             });
             ad.show();
-        }
+        }*/
 
         else {
 
