@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity{
             });
             ad.show();
         }
-        /*
+        /*e
         else if ( ed3.getText().toString().matches(""))
         {
             AlertDialog.Builder ad;
