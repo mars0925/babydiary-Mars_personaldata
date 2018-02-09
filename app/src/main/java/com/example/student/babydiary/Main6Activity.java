@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +37,10 @@ public class Main6Activity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(Main6Activity.this, " 您的戶籍地是:"+sp.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                WebSettings settings = wb.getSettings();
+                settings.setUseWideViewPort(true);
+                settings.setLoadWithOverviewMode(true);
+
 
                 wb.getSettings().setJavaScriptEnabled(true);
                 int i=0;
