@@ -194,7 +194,7 @@ public class Main7Activity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
 
     }
-    //menu點擊的事件
+    //menu點擊的事件.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
