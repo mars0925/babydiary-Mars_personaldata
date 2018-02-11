@@ -41,15 +41,15 @@ public class AlldataDAO {
 
     public ArrayList<Outputdata> getList() {
         ArrayList<Outputdata> mylist = new ArrayList<>();
-        Cursor c = db.query("badydata", new String[] {"_id", "date","time", "mothermilk","formula","weaning","tall","weight","headlength","startsleep","endsleep","sleepday","sleephour","sleepmin","addtype"}, null, null, null, null, null);
+        Cursor c = db.query("badydata", new String[] {"_id", "date","time", "mothermilk","formula","weaning","tall","weight","headlength","imagename","startsleep","endsleep","sleepday","sleephour","sleepmin","addtype"}, null, null, null, null, null);
         if (c.moveToFirst())
         {
-            Outputdata s1 = new Outputdata(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getDouble(6),c.getDouble(7),c.getDouble(8),c.getString(9),c.getString(10),c.getString(11),c.getString(12),c.getString(13),c.getInt(14));
+            Outputdata s1 = new Outputdata(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getDouble(6),c.getDouble(7),c.getDouble(8),c.getString(9),c.getString(10),c.getString(11),c.getString(12),c.getString(13),c.getString(14),c.getInt(15));
 
             mylist.add(s1);
             while(c.moveToNext())
             {
-                Outputdata  s =  new Outputdata(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getDouble(6),c.getDouble(7),c.getDouble(8),c.getString(9),c.getString(10),c.getString(11),c.getString(12),c.getString(13),c.getInt(14));
+                Outputdata  s =  new Outputdata(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getDouble(6),c.getDouble(7),c.getDouble(8),c.getString(9),c.getString(10),c.getString(11),c.getString(12),c.getString(13),c.getString(14),c.getInt(15));
                 mylist.add(s);
             }
         }
@@ -59,15 +59,15 @@ public class AlldataDAO {
     //依照日期
     public ArrayList<Outputdata> getListbydate(String date) {
         ArrayList<Outputdata> mylist = new ArrayList<>();
-        Cursor c = db.query("badydata", new String[] {"_id", "date","time", "mothermilk","formula","weaning","tall","weight","headlength","startsleep","endsleep","sleepday","sleephour","sleepmin","addtype"}, "date=?",new String[] {String.valueOf(date)}, null, null, null);
+        Cursor c = db.query("badydata", new String[] {"_id", "date","time", "mothermilk","formula","weaning","tall","weight","headlength","imagename","startsleep","endsleep","sleepday","sleephour","sleepmin","addtype"}, "date=?",new String[] {String.valueOf(date)}, null, null, null);
         if (c.moveToFirst())
         {
-            Outputdata s1 = new Outputdata(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getDouble(6),c.getDouble(7),c.getDouble(8),c.getString(9),c.getString(10),c.getString(11),c.getString(12),c.getString(13),c.getInt(14));
+            Outputdata s1 = new Outputdata(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getDouble(6),c.getDouble(7),c.getDouble(8),c.getString(9),c.getString(10),c.getString(11),c.getString(12),c.getString(13),c.getString(14),c.getInt(15));
 
             mylist.add(s1);
             while(c.moveToNext())
             {
-                Outputdata  s =  new Outputdata(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getDouble(6),c.getDouble(7),c.getDouble(8),c.getString(9),c.getString(10),c.getString(11),c.getString(12),c.getString(13),c.getInt(14));
+                Outputdata  s =  new Outputdata(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getDouble(6),c.getDouble(7),c.getDouble(8),c.getString(9),c.getString(10),c.getString(11),c.getString(12),c.getString(13),c.getString(14),c.getInt(15));
                 mylist.add(s);
             }
         }
@@ -111,14 +111,32 @@ public class AlldataDAO {
     }
 
 
+    //新增成長資料
+    public boolean addgrow(Grow_Data s)
+    {
+        ContentValues cv = new ContentValues();
+
+        //輸入資料庫的資料不要號碼
+        cv.put("date",s.date);
+        cv.put("time",s.time);
+        cv.put("tall",s.tall);
+        cv.put("weight",s.weight);
+        cv.put("headlength",s.headlength);
+        cv.put("imagename",s.imagename);
+        cv.put("addtype",s.addtype);
+        db.insert("badydata",null,cv);
+        db.close();
+        return true;
+    }
+
     //找出一筆gorw的資料
     public Grow_DataOutput getgrow(int id)
     {
-        Cursor c = db.query("badydata",new String[] {"_id", "date","time", "tall","weight","headlength","addtype"},"_id=?",
+        Cursor c = db.query("badydata",new String[] {"_id", "date","time", "tall","weight","headlength","imagename","addtype"},"_id=?",
                 new String[] {String.valueOf(id)},null,null,null);
         if (c.moveToFirst())
         {
-            Grow_DataOutput s = new Grow_DataOutput(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getInt(6));
+            Grow_DataOutput s = new Grow_DataOutput(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getString(6),c.getInt(7));
             return s;
         }
         return null;
@@ -218,6 +236,7 @@ public class AlldataDAO {
         cv.put("name",s.name);
         cv.put("gender",s.gender);
         cv.put("birthday",s.birthday);
+        cv.put("cityname",s.cityname);
         db.insert("personal_data",null,cv);
         db.close();
         return true;
@@ -225,10 +244,10 @@ public class AlldataDAO {
 
     //找出一筆寶寶的資料
     public Personal_DataOutput getpersonaldata(int id) {
-        Cursor c = db.query("personal_data", new String[]{"_personalid", "name", "gender", "birthday"}, "_personalid=?",
+        Cursor c = db.query("personal_data", new String[]{"_personalid", "name", "gender", "birthday","cityname"}, "_personalid=?",
                 new String[]{String.valueOf(id)}, null, null, null);
         if (c.moveToFirst()) {
-            Personal_DataOutput s = new Personal_DataOutput(c.getInt(0), c.getString(1), c.getInt(2), c.getString(3));
+            Personal_DataOutput s = new Personal_DataOutput(c.getInt(0), c.getString(1), c.getInt(2), c.getString(3),c.getInt(4));
             return s;
         }
         return null;
@@ -242,6 +261,7 @@ public class AlldataDAO {
         cv.put("name",s.name);
         cv.put("gender",s.gender);
         cv.put("birthday",s.birthday);
+        cv.put("cityname",s.cityname);
 
 
         db.update("personal_data",cv,"_personalid=?",

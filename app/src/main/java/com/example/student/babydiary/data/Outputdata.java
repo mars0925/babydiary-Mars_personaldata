@@ -14,6 +14,7 @@ public class Outputdata {
     public double tall;
     public double weight;
     public double headlength;//頭圍
+    public String imagename;
     public String startsleep;
     public String endsleep;
     public String sleepday;
@@ -22,7 +23,7 @@ public class Outputdata {
     public int addtype;
 
     public Outputdata(int id ,String date,String time, Double mothermilk, Double formula, Double weaning,
-                      double tall, double weight, double headlength,String startsleep,String endsleep,String sleepday,String sleephour,String sleepmin,int addtype){
+                      double tall, double weight, double headlength,String imagename,String startsleep,String endsleep,String sleepday,String sleephour,String sleepmin,int addtype){
         //String startsleep,String endsleep,String sleeptime
         this.id = id;
         this.date= date;
@@ -33,6 +34,7 @@ public class Outputdata {
         this.tall=tall;
         this.weight=weight;
         this.headlength=headlength;
+        this.imagename=imagename;
         this.startsleep = startsleep;
         this.endsleep = endsleep;
         this.sleepday = sleepday;

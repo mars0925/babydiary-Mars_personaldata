@@ -11,8 +11,9 @@ public class Grow_DataOutput {
     public double tall;
     public double weight;
     public double headlength;//頭圍
+    public String imagename;
     public int addtype;
-    public Grow_DataOutput(int id,String date, String time, double tall, double weight, double headlength,int addtype)
+    public Grow_DataOutput(int id,String date, String time, double tall, double weight, double headlength,String imagename,int addtype)
     {
         this.id = id;
         this.date=date;
@@ -20,6 +21,7 @@ public class Grow_DataOutput {
         this.tall=tall;
         this.weight=weight;
         this.headlength=headlength;
+        this.imagename = imagename;
         this.addtype = addtype;
 
     }

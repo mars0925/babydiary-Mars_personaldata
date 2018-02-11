@@ -41,7 +41,7 @@ public class Main7Activity extends AppCompatActivity {
     private int mYear;
     private int mMonth;
     private int mDay;
-    /*声明对象变量*0/
+    /*声明对象变量*/
     public TimePicker tp;
     public DatePicker dp;
     Calendar c,c1;

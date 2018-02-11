@@ -11,14 +11,16 @@ public class Grow_Data {
     public double tall;
     public double weight;
     public double headlength;//頭圍
+    public String imagename;
     public int addtype;
-    public Grow_Data(String data, String time, double tall, double weight, double headlength)
+    public Grow_Data(String data, String time, double tall, double weight, double headlength,String imagename)
     {
         this.date=data;
         this.time=time;
         this.tall=tall;
         this.weight=weight;
         this.headlength=headlength;
+        this.imagename = imagename;
         this.addtype = 2;
 
     }

@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.student.babydiary.data.AlldataDAO;
 import com.example.student.babydiary.data.Personal_Data;
@@ -47,6 +49,7 @@ import static java.security.AccessController.getContext;
 public class MainActivity extends AppCompatActivity{
     TextView tv,tv2,tv3,tv4;
     EditText ed,ed2,ed3;
+    Spinner sp_city;
     Calendar c;
     public static AlldataDAO dao;
     RadioGroup radioGroup_sex;
@@ -54,6 +57,10 @@ public class MainActivity extends AppCompatActivity{
     final public int imagerequest = 456;
     ArrayList<String> personaldata;
     public ImageView im;
+    final String[] city = {"台北市","新北市","基隆市","宜蘭縣","桃園市","新竹縣","新竹市","苗栗縣","花蓮縣","台東縣"
+            ,"台中市","彰化縣","南投縣","雲林縣","嘉義縣","嘉義市","台南市","高雄市","屏東縣","澎湖縣","金門縣","連江縣"
+    };
+    public int cityname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +71,7 @@ public class MainActivity extends AppCompatActivity{
         radioGroup_sex = (RadioGroup)findViewById(R.id.radioGroup_sex);
         ed = (EditText)findViewById(R.id.editText_name);
         im = (ImageView)findViewById(R.id.badyphto);
+        sp_city = (Spinner)findViewById(R.id.spinner_city);
         tv = new TextView(this);
         tv2 = new TextView(this);
         tv3 = new TextView(this);
@@ -99,6 +107,93 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        ArrayAdapter cityList = new ArrayAdapter<>(MainActivity.this,
+                R.layout.myspinner,city
+        );
+        cityList.setDropDownViewResource(R.layout.myspinner);
+
+        sp_city.setAdapter(cityList);
+        sp_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                switch (sp_city.getSelectedItemPosition())
+                {
+                    case 0:
+                    cityname = 0;
+                    break;
+                    case 1:
+                    cityname = 1;
+                    break;
+                    case 2:
+                    cityname = 2;
+                    break;
+                    case 3:
+                    cityname = 3;
+                    break;
+                    case 4:
+                    cityname = 4;
+                    break;
+                    case 5:
+                    cityname = 5;
+                    break;
+                    case 6:
+                    cityname = 6;
+                    break;
+                    case 7:
+                    cityname = 7;
+                    break;
+                    case 8:
+                    cityname = 8;
+                    break;
+                    case 9:
+                    cityname = 9;
+                    break;
+                    case 10:
+                    cityname = 10;
+                    break;
+                    case 11:
+                    cityname = 11;
+                    break;
+                    case 12:
+                    cityname = 12;
+                    break;
+                    case 13:
+                    cityname = 13;
+                    break;
+                    case 14:
+                    cityname = 14;
+                    break;
+                    case 15:
+                    cityname = 15;
+                    break;
+                    case 16:
+                    cityname = 16;
+                    break;
+                    case 17:
+                    cityname = 17;
+                    break;
+                    case 18:
+                    cityname = 18;
+                    break;
+                    case 19:
+                    cityname = 19;
+                    break;
+                    case 20:
+                    cityname = 20;
+                    break;
+                    case 21:
+                    cityname = 21;
+                    break;
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         ed2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +261,7 @@ public class MainActivity extends AppCompatActivity{
         reload();
     }
 
+
     //接受immageview點擊後送出的resultCode
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -219,6 +315,8 @@ public class MainActivity extends AppCompatActivity{
         loadphoto();
 
     }
+
+
 
     //按確定會把寶寶資料存到DB
     public void save()
@@ -274,13 +372,13 @@ public class MainActivity extends AppCompatActivity{
 
         else {
 
-            Personal_DataDAO dao = new Personal_DataDAO(MainActivity.this);
+
             //姓名,性別代號,生日
-
-
-            Personal_Data personal_data = new Personal_Data(ed.getText().toString(),gender,ed2.getText().toString());
+            Personal_Data personal_data = new Personal_Data(ed.getText().toString(),gender,ed2.getText().toString(),cityname);
+            Log.d("cityname",String.valueOf(cityname));
             //加入資料庫
             dao.addbaby(personal_data);
+
             finish();
         }
 
@@ -306,6 +404,75 @@ public class MainActivity extends AppCompatActivity{
                 radioGroup_sex.check(R.id.radioButton_boy);
             } else if (dao.getpersonaldata(1).gender == 0) {
                 radioGroup_sex.check(R.id.radioButton_girl);
+            }
+
+            switch (dao.getpersonaldata(1).cityname) {
+                case 0:
+                    sp_city.setSelection(0);
+                    break;
+                case 1:
+                    sp_city.setSelection(1);
+                    break;
+                case 2:
+                    sp_city.setSelection(2);
+                    break;
+                case 3:
+                    sp_city.setSelection(3);
+                    break;
+                case 4:
+                    sp_city.setSelection(4);
+                    break;
+                case 5:
+                    sp_city.setSelection(5);
+                    break;
+                case 6:
+                    sp_city.setSelection(6);
+                    break;
+                case 7:
+                    sp_city.setSelection(7);
+                    break;
+                case 8:
+                    sp_city.setSelection(8);
+                    break;
+                case 9:
+                    sp_city.setSelection(9);
+                    break;
+                case 10:
+                    sp_city.setSelection(10);
+                    break;
+                case 11:
+                    sp_city.setSelection(11);
+                    break;
+                case 12:
+                    sp_city.setSelection(12);
+                    break;
+                case 13:
+                    sp_city.setSelection(13);
+                    break;
+                case 14:
+                    sp_city.setSelection(14);
+                    break;
+                case 15:
+                    sp_city.setSelection(15);
+                    break;
+                case 16:
+                    sp_city.setSelection(16);
+                    break;
+                case 17:
+                    sp_city.setSelection(17);
+                    break;
+                case 18:
+                    sp_city.setSelection(18);
+                    break;
+                case 19:
+                    sp_city.setSelection(19);
+                    break;
+                case 20:
+                    sp_city.setSelection(20);
+                    break;
+                case 21:
+                    sp_city.setSelection(21);
+                    break;
             }
         }
         catch (Exception e)

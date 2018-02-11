@@ -12,13 +12,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.student.babydiary.data.AlldataDAO;
+
 public class Main6Activity extends AppCompatActivity {
     Spinner sp;
     WebView wb;
+    public static AlldataDAO dao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main6);
+        dao = new AlldataDAO(Main6Activity.this);
         sp= (Spinner)findViewById(R.id.spinner_support1);
         wb = (WebView)findViewById(R.id.webView);
         //sp2= (Spinner)findViewById(R.id.spinner_support2);
@@ -32,7 +36,7 @@ public class Main6Activity extends AppCompatActivity {
         cityList.setDropDownViewResource(R.layout.myspinner);
 
         sp.setAdapter(cityList);
-        sp.setSelection(0);
+        reload();
         sp.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -100,5 +104,87 @@ public class Main6Activity extends AppCompatActivity {
             }
 
         });
+    }
+
+
+    //資料庫有資料時代入資料
+    public void reload()
+    {
+        try {
+            //資料庫有資料時代入資料
+
+            switch (dao.getpersonaldata(1).cityname) {
+                case 0:
+                    sp.setSelection(0);
+                    break;
+                case 1:
+                    sp.setSelection(1);
+                    break;
+                case 2:
+                    sp.setSelection(2);
+                    break;
+                case 3:
+                    sp.setSelection(3);
+                    break;
+                case 4:
+                    sp.setSelection(4);
+                    break;
+                case 5:
+                    sp.setSelection(5);
+                    break;
+                case 6:
+                    sp.setSelection(6);
+                    break;
+                case 7:
+                    sp.setSelection(7);
+                    break;
+                case 8:
+                    sp.setSelection(8);
+                    break;
+                case 9:
+                    sp.setSelection(9);
+                    break;
+                case 10:
+                    sp.setSelection(10);
+                    break;
+                case 11:
+                    sp.setSelection(11);
+                    break;
+                case 12:
+                    sp.setSelection(12);
+                    break;
+                case 13:
+                    sp.setSelection(13);
+                    break;
+                case 14:
+                    sp.setSelection(14);
+                    break;
+                case 15:
+                    sp.setSelection(15);
+                    break;
+                case 16:
+                    sp.setSelection(16);
+                    break;
+                case 17:
+                    sp.setSelection(17);
+                    break;
+                case 18:
+                    sp.setSelection(18);
+                    break;
+                case 19:
+                    sp.setSelection(19);
+                    break;
+                case 20:
+                    sp.setSelection(20);
+                    break;
+                case 21:
+                    sp.setSelection(21);
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+
+        }
     }
 }

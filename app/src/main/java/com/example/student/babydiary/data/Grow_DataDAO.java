@@ -39,12 +39,13 @@ public class Grow_DataDAO {
     }
     //查詢growDB 資料
     //讀出資料庫用不同的class Grow_DataOutout 因為欄位不一樣
+    /*
     public ArrayList<Grow_DataOutput> getList() {
         ArrayList<Grow_DataOutput> mylist = new ArrayList<>();
         Cursor c = db.query("badydata", new String[] {"_id", "date","time", "tall","weight","headlength","addtype"}, null, null, null, null, null);
         if (c.moveToFirst())
         {
-            Grow_DataOutput s1 = new Grow_DataOutput(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getInt(6));
+            Grow_DataOutput s1 = new Grow_DataOutput(c.getInt(0),c.getString(1),c.getString(2),c.getDouble(3),c.getDouble(4),c.getDouble(5),c.getString(6),c.getInt(7));
 
             mylist.add(s1);
             while(c.moveToNext())
@@ -55,7 +56,8 @@ public class Grow_DataDAO {
         }
         return mylist;
     }
-
+    */
+    /*
     //找出一筆gorw的資料
     public Grow_DataOutput getgrow(int grownum)
     {
@@ -68,6 +70,7 @@ public class Grow_DataDAO {
         }
         return null;
     }
+    */
 
 
     //修改成長資料
