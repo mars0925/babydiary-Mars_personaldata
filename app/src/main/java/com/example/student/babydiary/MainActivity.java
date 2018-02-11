@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity{
 
                 File f = new File(getExternalFilesDir("PHOTO"), "myphoto.jpg");
 
-                //
+
                 Uri uri = FileProvider.getUriForFile(MainActivity.this, "com.example.student.babydiary.provider", f);
                 it.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 

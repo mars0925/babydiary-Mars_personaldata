@@ -41,7 +41,7 @@ public class Main7Activity extends AppCompatActivity {
     private int mYear;
     private int mMonth;
     private int mDay;
-    /*声明对象变量*/
+    /*声明对象变量*0/
     public TimePicker tp;
     public DatePicker dp;
     Calendar c,c1;
@@ -261,13 +261,6 @@ public class Main7Activity extends AppCompatActivity {
     {
         String hr =  dao.getListbydate(date).get(i).sleephour;
         String min =  dao.getListbydate(date).get(i).sleepmin;
-        /*
-        String timestr = dao.getList().get(i).sleeptime; //取睡覺的時間
-        String[] str = timestr.split(":");//剖析分鐘的部分
-        int hr = Integer.valueOf(str[1]);//轉整數去掉前面的0
-        int m = Integer.valueOf(str[2]);//轉整數去掉前面的0
-        */
-
         String contextstr;
         contextstr = "寶寶睡覺 " + dao.getListbydate(date).get(i).startsleep + "" + "\n" +
                 "總共睡了 " + hr + "小時"+ min + "分鐘";
